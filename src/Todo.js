@@ -2,7 +2,7 @@ import React from 'react'
 
 import { connect } from 'react-redux'
 
-import { newTaskTextHandler, addTask } from './state/todo'
+import { newTaskTextHandler, addTask, toggleIsCompleted } from './state/todo'
 
 const Todo = (props) => (
     <div>
@@ -13,8 +13,22 @@ const Todo = (props) => (
         <button
             onClick={props._addTask}
         >
-        Add task!
+            Add task!
         </button>
+        <ul>
+            {props._tasks.map(task => (
+                <li
+                    style={
+                        task.isCompleted ?
+                            { textDecoration: 'line-through' }
+                            : { textDecoration: 'none' }
+                    }
+                    onClick={() => props._toggleIsCompleted(task.id)}
+                >
+                    {task.text}
+                </li>
+            ))}
+        </ul>
     </div>
 )
 
@@ -25,7 +39,8 @@ const mapStateToProps = state => ({
 
 const dispatchToProps = dispatch => ({
     _newTaskTextHandler: (e) => dispatch(newTaskTextHandler(e.target.value)),
-    _addTask: () => dispatch(addTask())
+    _addTask: () => dispatch(addTask()),
+    _toggleIsCompleted: (taskKey) => dispatch(toggleIsCompleted(taskKey))
 })
 
 

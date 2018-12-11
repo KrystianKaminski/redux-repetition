@@ -1,5 +1,6 @@
 const NEW_TASK = 'todo/NEW_TASK'
 const ADD_TASK = 'todo/ADD_TASK'
+const TOGGLE_IS_COMPLETED = 'todo/TOGGLE_IS_COMPLETED'
 
 const INITIAL_STATE = {
     tasks: [],
@@ -15,15 +16,21 @@ export const addTask = () => ({
     type: ADD_TASK,
 })
 
+export const toggleIsCompleted = (taskKey) => ({
+    type: TOGGLE_IS_COMPLETED,
+    taskKey
+})
+
 const createTask = task => ({
     text: task,
-    isCompleted: false
+    isCompleted: false,
+    id: Date.now()
 })
 
 export default (state = INITIAL_STATE, action) => {
-    switch(action.type) {
+    switch (action.type) {
 
-        case NEW_TASK: 
+        case NEW_TASK:
             return {
                 ...state,
                 newTask: action.value
@@ -32,6 +39,18 @@ export default (state = INITIAL_STATE, action) => {
             return {
                 ...state,
                 tasks: state.tasks.concat(createTask(state.newTask))
+            }
+        case TOGGLE_IS_COMPLETED:
+            return {
+                ...state,
+                tasks: state.tasks.map(task =>
+                    task.id === action.taskKey ?
+                        {
+                            ...task,
+                            isCompleted: !task.isCompleted
+                        }
+                        : task
+                )
             }
 
         default:
