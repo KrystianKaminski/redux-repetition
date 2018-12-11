@@ -6,7 +6,10 @@ import {
     newTaskTextHandler,
     addTask,
     toggleIsCompleted,
-    deleteTask
+    deleteTask,
+    showAll,
+    showCompleted,
+    showUncompleted
 } from './state/todo'
 
 const Todo = (props) => (
@@ -20,8 +23,37 @@ const Todo = (props) => (
         >
             Add task!
         </button>
+        <button
+        onClick={() => props._showAll()}
+        >
+        Show all
+        </button>
+        <button
+        onClick={() => props._showCompleted()}
+        >
+        Show completed
+        </button>
+        <button
+        onClick={() => props._showUncompleted()}
+        >Show uncompleted</button>
         <ul>
-            {props._tasks.map(task => (
+            {props._tasks
+            
+            .filter(task => {
+                switch(props._filterMethod) {
+                    case 'ALL':
+                        return true
+                    case 'COMPLETED':
+                        return task.isCompleted
+                    case 'UNCOMPLETED':
+                        return !task.isCompleted
+
+                    default:
+                        return true
+                }
+            })
+            
+            .map(task => (
                 <div>
 
                     <li
@@ -47,14 +79,18 @@ const Todo = (props) => (
 
 const mapStateToProps = state => ({
     _currentTask: state.todo.currentTask,
-    _tasks: state.todo.tasks
+    _tasks: state.todo.tasks,
+    _filterMethod: state.todo.filterMethod
 })
 
 const dispatchToProps = dispatch => ({
     _newTaskTextHandler: (e) => dispatch(newTaskTextHandler(e.target.value)),
     _addTask: () => dispatch(addTask()),
     _toggleIsCompleted: (taskKey) => dispatch(toggleIsCompleted(taskKey)),
-    _deleteTask: (taskKey) => dispatch(deleteTask(taskKey)) 
+    _deleteTask: (taskKey) => dispatch(deleteTask(taskKey)),
+    _showAll: () => dispatch(showAll()),
+    _showCompleted: () => dispatch(showCompleted()),
+    _showUncompleted: () => dispatch(showUncompleted())
 })
 
 
