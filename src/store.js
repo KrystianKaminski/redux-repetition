@@ -1,8 +1,13 @@
 import { createStore, combineReducers } from 'redux'
 
-const reducer = () => ({
-    name: 'Krystian'
-})
+
+
+const reducer = (state, action) => {
+   if (action.type === 'FIRST_ACTION') {
+       return {firstAction: true}
+   }
+    return {firstAction: false}
+}
 
 export const store = createStore(
     reducer,
