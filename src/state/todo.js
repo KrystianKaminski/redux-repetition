@@ -1,6 +1,7 @@
 const NEW_TASK = 'todo/NEW_TASK'
 const ADD_TASK = 'todo/ADD_TASK'
 const TOGGLE_IS_COMPLETED = 'todo/TOGGLE_IS_COMPLETED'
+const DELETE_TASK = 'todo/DELETE_TASK'
 
 const INITIAL_STATE = {
     tasks: [],
@@ -18,6 +19,11 @@ export const addTask = () => ({
 
 export const toggleIsCompleted = (taskKey) => ({
     type: TOGGLE_IS_COMPLETED,
+    taskKey
+})
+
+export const deleteTask = (taskKey) => ({
+    type: DELETE_TASK,
     taskKey
 })
 
@@ -51,6 +57,11 @@ export default (state = INITIAL_STATE, action) => {
                         }
                         : task
                 )
+            }
+        case DELETE_TASK:
+            return {
+                ...state,
+                tasks: state.tasks.filter(task => task.id !== action.taskKey)
             }
 
         default:
