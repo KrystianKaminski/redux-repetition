@@ -20,15 +20,9 @@ export const store = createStore(
     window.__REDUX_DEVTOOLS_EXTENSION__()
 )
 
-store.dispatch({
-    type: 'FIRST_ACTION'
-})
+const firstAction = () => ({ type: 'FIRST_ACTION'})
 
-store.dispatch({
-    type: 'FIRST_ACTION'
-})
-
-window.dispatchFirstAction = () => store.dispatch({ type: 'FIRST_ACTION'})
+window.dispatchFirstAction = () => store.dispatch(firstAction())
 
 window.dispatchFirstAction()
 window.dispatchFirstAction()
