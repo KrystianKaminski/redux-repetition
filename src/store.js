@@ -14,13 +14,22 @@ const reducer = (state = INITIAL_STATE, action) => {
     return state // by default returns prev state
 }
 
+const counterReducer = () => ({counter: 0})
+
+const reducersCombine = combineReducers({
+    firstActionReducerName: reducer,
+    counterReducerName: counterReducer
+})
+
 export const store = createStore(
-    reducer,
+    reducersCombine,
     window.__REDUX_DEVTOOLS_EXTENSION__ &&
     window.__REDUX_DEVTOOLS_EXTENSION__()
 )
 
-const firstAction = () => ({ type: 'FIRST_ACTION'})
+const FIRST_ACTION = 'FIRST_ACTION'
+
+const firstAction = () => ({ type: FIRST_ACTION})
 
 window.dispatchFirstAction = () => store.dispatch(firstAction())
 
