@@ -1,8 +1,12 @@
 import React from 'react'
 import Counter from './Counter'
+import Todo from './Todo'
 
 const App = () => (
-    <Counter/>
+    <div>
+        <Counter />
+        <Todo />
+    </div>
 )
 
 export default App

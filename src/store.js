@@ -1,6 +1,8 @@
 import { createStore, combineReducers } from 'redux'
 
-import counter, {add, dec} from './state/counter'
+import counter, { add, dec } from './state/counter'
+
+import todo, { newTaskTextHandler, addTask } from './state/todo'
 
 const INITIAL_STATE = {
     firstAction: false
@@ -19,7 +21,8 @@ const reducer = (state = INITIAL_STATE, action) => {
 
 const reducersCombine = combineReducers({
     firstActionReducerName: reducer,
-    counter
+    counter,
+    todo
 })
 
 export const store = createStore(
@@ -30,7 +33,7 @@ export const store = createStore(
 
 const FIRST_ACTION = 'FIRST_ACTION'
 
-const firstAction = () => ({ type: FIRST_ACTION})
+const firstAction = () => ({ type: FIRST_ACTION })
 
 
 window.dispatchFirstAction = () => store.dispatch(firstAction())
@@ -44,3 +47,7 @@ store.dispatch(add())
 store.dispatch(add())
 store.dispatch(add())
 store.dispatch(dec())
+
+window.dispatchAddTask = () => store.dispatch(addTask())
+
+window.dispatchAddTask('aaa')
