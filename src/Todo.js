@@ -2,7 +2,7 @@ import React from 'react'
 
 import { connect } from 'react-redux'
 
-import { newTaskTextHandler } from './state/todo'
+import { newTaskTextHandler, addTask } from './state/todo'
 
 const Todo = (props) => (
     <div>
@@ -10,7 +10,11 @@ const Todo = (props) => (
             value={props._currentTask}
             onChange={props._newTaskTextHandler}
         />
-        <button>Add task!</button>
+        <button
+            onClick={props._addTask}
+        >
+        Add task!
+        </button>
     </div>
 )
 
@@ -20,7 +24,8 @@ const mapStateToProps = state => ({
 })
 
 const dispatchToProps = dispatch => ({
-    _newTaskTextHandler: () => dispatch(newTaskTextHandler())
+    _newTaskTextHandler: (e) => dispatch(newTaskTextHandler(e.target.value)),
+    _addTask: () => dispatch(addTask())
 })
 
 

@@ -47,7 +47,3 @@ store.dispatch(add())
 store.dispatch(add())
 store.dispatch(add())
 store.dispatch(dec())
-
-window.dispatchAddTask = () => store.dispatch(addTask())
-
-window.dispatchAddTask('aaa')

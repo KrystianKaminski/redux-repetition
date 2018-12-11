@@ -11,9 +11,13 @@ export const newTaskTextHandler = (value) => ({
     value
 })
 
-export const addTask = newTask => ({
+export const addTask = () => ({
     type: ADD_TASK,
-    newTask
+})
+
+const createTask = task => ({
+    text: task,
+    isCompleted: false
 })
 
 export default (state = INITIAL_STATE, action) => {
@@ -27,7 +31,7 @@ export default (state = INITIAL_STATE, action) => {
         case ADD_TASK:
             return {
                 ...state,
-                tasks: state.tasks.concat(action.newTask)
+                tasks: state.tasks.concat(createTask(state.newTask))
             }
 
         default:
