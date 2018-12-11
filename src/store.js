@@ -1,12 +1,17 @@
 import { createStore, combineReducers } from 'redux'
 
+const INITIAL_STATE = {
+    firstAction: false
+}
 
-
-const reducer = (state, action) => {
-   if (action.type === 'FIRST_ACTION') {
-       return {firstAction: true}
-   }
-    return {firstAction: false}
+const reducer = (state = INITIAL_STATE, action) => {
+    if (action.type === 'FIRST_ACTION') {
+        return {
+            ...state,
+            firstAction: true
+        }
+    }
+    return state // by default returns prev state
 }
 
 export const store = createStore(
