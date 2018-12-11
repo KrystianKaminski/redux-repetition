@@ -27,3 +27,10 @@ store.dispatch({
 store.dispatch({
     type: 'FIRST_ACTION'
 })
+
+window.dispatchFirstAction = () => store.dispatch({ type: 'FIRST_ACTION'})
+
+window.dispatchFirstAction()
+window.dispatchFirstAction()
+window.dispatchFirstAction()
+window.dispatchFirstAction()
