@@ -5,8 +5,8 @@ const INITIAL_STATE = {
     counter: 0
 }
 
-const add = () => ({type: INC})
-const dec = () => ({type: DEC})
+export const add = () => ({type: INC})
+export const dec = () => ({type: DEC})
 
 
 export default (state = INITIAL_STATE, action) => {

@@ -1,6 +1,6 @@
 import { createStore, combineReducers } from 'redux'
 
-import counter from './state/counter'
+import counter, {add, dec} from './state/counter'
 
 const INITIAL_STATE = {
     firstAction: false
@@ -39,3 +39,8 @@ window.dispatchFirstAction()
 window.dispatchFirstAction()
 window.dispatchFirstAction()
 window.dispatchFirstAction()
+
+store.dispatch(add())
+store.dispatch(add())
+store.dispatch(add())
+store.dispatch(dec())
