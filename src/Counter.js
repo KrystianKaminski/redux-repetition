@@ -1,12 +1,36 @@
 import React from 'react'
 
-const Counter = () => (
+import { connect } from 'react-redux'
+
+import { add, dec } from './state/counter'
+
+const Counter = (props) => (
     <div>
-        <h1>Value: </h1>
-        <button>+</button>
-        <button>-</button>
+        <h1>Value: {props._counter} </h1>
+        <button
+            onClick={props._increment}
+        >
+            +
+        </button>
+        <button
+            onClick={props._decrement}
+        >
+            -
+        </button>
     </div>
 
 )
 
-export default Counter
+const mapStateToProps = (state) => ({
+    _counter: state.counter.counter
+})
+
+const dispatchToProps = (dispatch) => ({
+    _increment: () => dispatch(add()),
+    _decrement: () => dispatch(dec())
+})
+
+export default connect(
+    mapStateToProps,
+    dispatchToProps
+)(Counter)
